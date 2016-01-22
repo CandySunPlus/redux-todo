@@ -1,9 +1,11 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
 import todoApp from './reducers'
 import {addTodo, completeTodo, setVisibilityFilter} from './actions/todos'
 import {VisibilityFilters} from './actions/action-types'
-import React from 'react'
-import ReactDOM from 'react-dom'
 import App from './components/app'
 
 let store = createStore(todoApp);
@@ -15,7 +17,9 @@ let unsubscribe = store.subscribe(() => {
 });
 
 ReactDOM.render(
-  <App/>,
+  <Provider store={store}>
+    <App/>
+  </Provider>,
   document.getElementById('demoApp')
 );
 

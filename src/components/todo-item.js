@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react'
 
 export default class TodoItem extends Component {
   render() {
-    console.log('in');
     return (
       <li onClick={this.props.onClick}
       style={{
