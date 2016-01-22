@@ -1,0 +1,30 @@
+{
+  "name": "simple",
+  "version": "1.0.0",
+  "description": "simple demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --harmony server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NikSun",
+  "license": "ISC",
+  "dependencies": {
+    "es6-enum": "^1.0.0",
+    "immutable": "^3.7.6",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.0.6",
+    "redux": "^3.0.5",
+    "redux-devtools": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.12.11",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
