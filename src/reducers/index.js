@@ -3,8 +3,8 @@ import {combineReducers} from 'redux'
 
 
 const todoApp = combineReducers({
-    visibilityFilter,
-    todos
+  visibilityFilter,
+  todos
 });
 
 export default todoApp;

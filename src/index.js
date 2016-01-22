@@ -11,12 +11,12 @@ let store = createStore(todoApp);
 console.log(store.getState());
 
 let unsubscribe = store.subscribe(() => {
-    console.log(store.getState());
+  console.log(store.getState());
 });
 
 ReactDOM.render(
-    <App/>,
-    document.getElementById('demoApp')
+  <App/>,
+  document.getElementById('demoApp')
 );
 
 
