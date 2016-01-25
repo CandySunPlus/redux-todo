@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore,  } from 'redux'
 import { Provider } from 'react-redux'
 import TodoApp from './components/app.jsx'
-import todos from './reducers/todos'
+import reducers from './reducers/todos'
 
 
-const store = createStore(todos);
+const store = createStore(reducers);
 
 console.log(store.getState());
 
