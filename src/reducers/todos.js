@@ -11,7 +11,7 @@ const initialState = Immutable.fromJS([{
 export default function todos(state=initialState, action) {
   switch (action.type) {
     case TodoActions.ADD_TODO:
-    let newTodo = Immutable.Map({
+    const newTodo = Immutable.Map({
       id: state.size + 1,
       text: action.text,
       completed: false

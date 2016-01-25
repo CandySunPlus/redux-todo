@@ -10,15 +10,16 @@ export default class TodoInput extends Component {
     newTodo: PropTypes.bool
   };
 
-  componentDidMount() {
-    this.refs.todoInput.value = this.props.text || '';
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      text: props.text || ''
+    };
   }
 
   handleSubmit(evt) {
-    console.log(this.refs.todoInput.value.trim());
-    console.log(evt);
-    if (evt.witch === 13) {
-      const text = this.refs.todoInput.value.trim();
+    if (evt.which === 13) {
+      const text = evt.target.value.trim();
       this.props.onSave(text);
       if (this.props.newTodo) {
         this.setState({text: ''});
@@ -28,8 +29,12 @@ export default class TodoInput extends Component {
 
   handleBlur(evt) {
     if (!this.props.newTodo) {
-      this.props.onSave(this.refs.todoInput.value.trim());
+      this.props.onSave(evt.target.value.trim());
     }
+  }
+
+  handleChange(evt) {
+    this.setState({text: evt.target.value.trim()});
   }
 
   render() {
@@ -41,7 +46,8 @@ export default class TodoInput extends Component {
         type="text"
         placeholder={this.props.placeholder}
         autoFocus="true"
-        ref="todoInput"
+        value={this.state.text}
+        onChange={::this.handleChange}
         onBlur={::this.handleBlur}
         onKeyDown={::this.handleSubmit} />
     );
