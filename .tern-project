@@ -4,9 +4,6 @@
     "browser",
     "jquery"
   ],
-  "loadEagerly": [
-    "src/**/*.js"
-  ],
   "plugins": {
     "node": {},
     "modules": {},

@@ -8,7 +8,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './src/index'
+    './src/index.jsx'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -28,7 +28,7 @@ module.exports = {
   ],
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.js$|\.jsx$/,
       loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'],
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
