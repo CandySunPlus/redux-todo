@@ -5,7 +5,7 @@ var webpack = require('webpack')
 module.exports = {
   devtool: 'source-map',
   entry: [
-    "webpack-dev-server/client?http://localhost:3000",
+    'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './src/index'
   ],
@@ -27,7 +27,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: ['react-hot', "babel?presets[]=react,presets[]=es2015"],
+      loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015'],
       exclude: /(node_modules|bower_components)/,
       include: path.join(__dirname, 'src')
     }]

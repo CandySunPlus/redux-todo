@@ -7,16 +7,16 @@ export default class TodoListSwitcher extends Component {
       return name;
     }
     return (
-      <a href="#"
+        <a href="#"
         onClick={e => {
           e.preventDefault();
           this.props.onFilterChange(filter);
         }}>{name}</a>
-    );
+        );
   }
   render() {
     return (
-      <p>
+        <p>
         Show:
         {' '}
         {this.renderFilter(VisibilityFilters.SHOW_ALL, 'All')}
@@ -25,14 +25,14 @@ export default class TodoListSwitcher extends Component {
         {', '}
         {this.renderFilter(VisibilityFilters.SHOW_ACTIVE, 'Active')}
         </p>
-    )
+        )
   }
 }
 TodoListSwitcher.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
   filter: PropTypes.oneOf([
-    VisibilityFilters.SHOW_ALL,
-    VisibilityFilters.SHOW_COMPLETED,
-    VisibilityFilters.SHOW_ACTIVE
+      VisibilityFilters.SHOW_ALL,
+      VisibilityFilters.SHOW_COMPLETED,
+      VisibilityFilters.SHOW_ACTIVE
   ]).isRequired
 };

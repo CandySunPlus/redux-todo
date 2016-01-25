@@ -9,15 +9,15 @@ export default class TodoList extends Component {
       let props = todo.toObject();
       todoItems.push(
         <TodoItem 
-          {...props}
-          key={index}
-          onClick={() => this.props.onTodoItemClick(index)} />
+        {...props}
+        key={index}
+        onClick={() => this.props.onTodoItemClick(index)} />
       );
     });
     return (
       <ul>
-        {todoItems}
-        </ul>
+      {todoItems}
+      </ul>
     );
   }
 }
