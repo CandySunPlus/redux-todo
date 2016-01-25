@@ -1,23 +1,41 @@
-import {VisibilityFilters, ActionTypes} from '../actions/action-types'
 import Immutable from 'immutable'
+import { TodoActions } from '../actions/todos'
 
-export function todos(state=Immutable.List.of(), action) {
+const initialState = Immutable.fromJS([{
+  text: 'First Todo',
+  completed: false,
+  id: 1
+}]);
+
+// redux reducer is make (state, action) => new state
+export default function todos(state=initialState, action) {
   switch (action.type) {
-    case ActionTypes.ADD_TODO:
-      return state.push(Immutable.Map({text: action.text, completed: false}));
-    case ActionTypes.COMPLETE_TODO:
-      return state.update(action.index, item => item.set('completed', true));
+    case TodoActions.ADD_TODO:
+    let newTodo = Immutable.Map({
+      id: state.size + 1,
+      text: action.text,
+      completed: false
+    });
+    return state.push(newTodo);
+    case TodoActions.DELETE_TODO:
+    return state.filter(todo => todo.id !== action.id);
+    case TodoActions.EDIT_TODO:
+    return state.map(todo => {
+      todo.id === action.id ? todo.set('text', action.text) : todo;
+    });
+    case TodoActions.COMPLETE_TODO:
+    return state.map(todo => {
+      todo.id === action.id ? todo.set('completed', !todo.completed) : todo;
+    });
+    case TodoActions.COMPLETE_ALL_TODO:
+    return state.map(todo => {
+      todo.set('completed', true);
+    });
+    case TodoActions.CLEAR_COMPLETED_TODO:
+    return state.filter(todo => {
+      todo.completed === false;
+    });
     default:
-      return state;
+    return state;
   }
 }
-
-export function visibilityFilter(state=VisibilityFilters.SHOW_ALL, action) {
-  switch (action.type) {
-    case ActionTypes.SET_VISIBILITY_FILTER:
-      return action.filter;
-    default:
-      return state;
-  }
-}
-

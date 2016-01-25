@@ -1,19 +1,59 @@
-import {ActionTypes} from './action-types'
+import Enum from 'es6-enum'
 
-export function addTodo(text) {
-  return {
-    type: ActionTypes.ADD_TODO, text
-  };
-}
+// Todo filter types
+export const TodoFilters = Enum(
+  'SHOW_ALL',
+  'SHOW_COMPLETED',
+  'SHOW_ACTIVE'
+);
 
-export function completeTodo(index) {
-  return {
-    type: ActionTypes.COMPLETE_TODO, index
-  };
-}
+// Todo action types
+export const TodoActions = Enum(
+  'ADD_TODO',
+  'DELETE_TODO',
+  'EDIT_TODO',
+  'COMPLETE_TODO',
+  'COMPLETE_ALL_TODO',
+  'CLEAR_COMPLETED_TODO'
+);
 
-export function setVisibilityFilter(filter) {
+export const addTodo = (text) => {
   return {
-    type: ActionTypes.SET_VISIBILITY_FILTER, filter
+    type: TodoActions.ADD_TODO,
+    text
   };
-}
+};
+
+export const deleteTodo = (id) => {
+  return {
+    type: TodoActions.DELETE_TODO,
+    id
+  };
+};
+
+export const editTodo = (id, text) => {
+  return {
+    type: TodoActions.EDIT_TODO,
+    id,
+    text
+  };
+};
+
+export const completeTodo = (id) => {
+  return {
+    type: TodoActions.COMPLETE_TODO,
+    id
+  };
+};
+
+export const completeAllTodo = () => {
+  return {
+    type: TodoActions.COMPLETE_ALL_TODO
+  };
+};
+
+export const clearCompletedTodo = () => {
+  return {
+    type: TodoActions.CLEAR_COMPLETED_TODO
+  };
+};

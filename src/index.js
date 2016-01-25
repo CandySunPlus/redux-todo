@@ -1,28 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
+import { createStore } from 'redux'
 
-import todoApp from './reducers'
-import {addTodo, completeTodo, setVisibilityFilter} from './actions/todos'
-import {VisibilityFilters} from './actions/action-types'
-import App from './components/app'
+import todos from './reducers'
+import TodoInput from './components/todo-input'
 
-let store = createStore(todoApp);
+let store = createStore(todos);
 
-// state
 console.log(store.getState());
 
 let unsubscribe = store.subscribe(() => {
-  console.log(store.getState());
+    console.log(store.getState());
 });
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('demoApp')
-);
-
-
-
+import './public/index.css'
