@@ -10,6 +10,7 @@ import App from './components/app'
 
 let store = createStore(todoApp);
 
+// state
 console.log(store.getState());
 
 let unsubscribe = store.subscribe(() => {
@@ -18,7 +19,7 @@ let unsubscribe = store.subscribe(() => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <App />
   </Provider>,
   document.getElementById('demoApp')
 );

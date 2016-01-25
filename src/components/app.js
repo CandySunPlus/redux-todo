@@ -7,6 +7,7 @@ import TodoListSwitcher from './todo-list-switcher';
 import {VisibilityFilters} from '../actions/action-types';
 import {addTodo, completeTodo, setVisibilityFilter} from '../actions/todos.js';
 
+
 class App extends Component {
   render() {
     const {dispatch, visibleTodos, visibilityFilter} = this.props;
