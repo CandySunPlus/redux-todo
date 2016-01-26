@@ -12,6 +12,7 @@ export default class TodoInput extends Component {
 
   constructor(props, context) {
     super(props, context);
+    this._inputDOMNode = null;
     this.state = {
       text: props.text || ''
     };
@@ -37,12 +38,20 @@ export default class TodoInput extends Component {
     this.setState({text: evt.target.value});
   }
 
+  componentDidMount() {
+    // change to editing state
+    if (this.props.editing) {
+      this._inputDOMNode.select();
+    }
+  }
+
   render() {
     return (
       <input className={classnames({
           'edit': this.props.editing,
           'new-todo': this.props.newTodo
         })}
+        ref={(c) => this._inputDOMNode = c}
         type="text"
         placeholder={this.props.placeholder}
         autoFocus="true"

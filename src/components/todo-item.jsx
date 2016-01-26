@@ -35,6 +35,7 @@ export default class TodoItem extends Component {
     this.setState({editing: true});
   }
 
+
   render() {
     const {todo, completeTodo, deleteTodo} = this.props;
     let todoItemElem;

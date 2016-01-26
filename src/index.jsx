@@ -6,9 +6,7 @@ import TodoApp from './components/app.jsx'
 import { TodoActionCreators } from './actions/todos'
 import reducers from './reducers/todos'
 
-
 const store = createStore(reducers);
-
 const unsubscribe = store.subscribe(() => {
   // you can add more process here when action dispatched
   // console.log(store.getState());
