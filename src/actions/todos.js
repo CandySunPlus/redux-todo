@@ -17,21 +17,21 @@ export const TodoActions = Enum(
   'CLEAR_COMPLETED_TODO'
 );
 
-export const addTodo = (text) => {
+const addTodo = (text) => {
   return {
     type: TodoActions.ADD_TODO,
     text
   };
 };
 
-export const deleteTodo = (id) => {
+const deleteTodo = (id) => {
   return {
     type: TodoActions.DELETE_TODO,
     id
   };
 };
 
-export const editTodo = (id, text) => {
+const editTodo = (id, text) => {
   return {
     type: TodoActions.EDIT_TODO,
     id,
@@ -39,21 +39,26 @@ export const editTodo = (id, text) => {
   };
 };
 
-export const completeTodo = (id) => {
+const completeTodo = (id) => {
   return {
     type: TodoActions.COMPLETE_TODO,
     id
   };
 };
 
-export const completeAllTodo = () => {
+const completeAllTodo = (isAllCompleted) => {
   return {
-    type: TodoActions.COMPLETE_ALL_TODO
+    type: TodoActions.COMPLETE_ALL_TODO,
+    isAllCompleted
   };
 };
 
-export const clearCompletedTodo = () => {
+const clearCompletedTodo = () => {
   return {
     type: TodoActions.CLEAR_COMPLETED_TODO
   };
+};
+
+export const TodoActionCreators = {
+  addTodo, deleteTodo, editTodo, completeTodo, completeAllTodo, clearCompletedTodo
 };

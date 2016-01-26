@@ -25,11 +25,11 @@ export default function todos(state=initialState, action) {
     });
     case TodoActions.COMPLETE_TODO:
     return state.map(todo => {
-      return todo.get('id') === action.id ? todo.set('completed', !todo.completed) : todo;
+      return todo.get('id') === action.id ? todo.set('completed', !todo.get('completed')) : todo;
     });
     case TodoActions.COMPLETE_ALL_TODO:
     return state.map(todo => {
-      return todo.set('completed', true);
+      return todo.set('completed', !action.isAllCompleted);
     });
     case TodoActions.CLEAR_COMPLETED_TODO:
     return state.filter(todo => {

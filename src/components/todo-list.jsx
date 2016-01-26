@@ -19,7 +19,7 @@ export default class TodoList extends Component {
         id: PropTypes.number.isRequired
       })
     ).isRequired,
-    actions: PropTypes.object.isRequired
+    completeAllTodo: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
@@ -28,13 +28,13 @@ export default class TodoList extends Component {
   }
 
   renderToggleAll(completedCount) {
-    const { todos, actions } = this.props;
+    const { todos, completeAllTodo } = this.props;
     if (todos.size > 0) {
       return (
         <input className="toggle-all"
           type="checkbox"
           checked={completedCount === todos.size}
-          onChange={actions.completeAllTodo} />
+          onChange={() => completeAllTodo(completedCount === todos.size)} />
       );
     }
   }
@@ -59,21 +59,21 @@ export default class TodoList extends Component {
   }
 
   handleClearCompleted() {
-
+    const { clearCompletedTodo } = this.props;
+    clearCompletedTodo();
   }
 
   render() {
-    const { todos, actions } = this.props;
-
+    const {todos, completeAllTodo, clearCompletedTodo, ...props} = this.props;
     const filteredTodos = todos.filter(TODO_FILTERS[this.state.filter]);
     const completedCount = todos.count((todo) => {
       return todo.get('completed') === true
     });
-    let todoItems = [];
 
+    let todoItems = [];
     filteredTodos.map(todo => {
       todoItems.push(
-        <TodoItem key={todo.get('id')} todo={todo} {...actions} />
+        <TodoItem key={todo.get('id')} todo={todo} {...props} />
       );
     });
 

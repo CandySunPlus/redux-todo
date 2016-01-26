@@ -17,7 +17,6 @@ export default class TodoApp extends Component {
   };
 
   componentWillUnmount() {
-    // unsubcribe store dispatch when root component will unmount
     const { onDestroy } = this.props;
     onDestroy();
   }
@@ -25,10 +24,10 @@ export default class TodoApp extends Component {
   render() {
     const { todos, actions } = this.props;
     return (
-      <div>
+      <section className="todoapp">
         <Header addTodo={actions.addTodo} />
-        <TodoList todos={todos} actions={actions} />
-      </div>
+        <TodoList todos={todos} {...actions} />
+      </section>
     );
   }
 }
