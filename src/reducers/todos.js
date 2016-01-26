@@ -18,22 +18,22 @@ export default function todos(state=initialState, action) {
     });
     return state.push(newTodo);
     case TodoActions.DELETE_TODO:
-    return state.filter(todo => todo.id !== action.id);
+    return state.filter(todo => todo.get('id') !== action.id);
     case TodoActions.EDIT_TODO:
     return state.map(todo => {
-      todo.id === action.id ? todo.set('text', action.text) : todo;
+      return todo.get('id') === action.id ? todo.set('text', action.text) : todo;
     });
     case TodoActions.COMPLETE_TODO:
     return state.map(todo => {
-      todo.id === action.id ? todo.set('completed', !todo.completed) : todo;
+      return todo.get('id') === action.id ? todo.set('completed', !todo.completed) : todo;
     });
     case TodoActions.COMPLETE_ALL_TODO:
     return state.map(todo => {
-      todo.set('completed', true);
+      return todo.set('completed', true);
     });
     case TodoActions.CLEAR_COMPLETED_TODO:
     return state.filter(todo => {
-      todo.completed === false;
+      return todo.get('completed') === false;
     });
     default:
     return state;

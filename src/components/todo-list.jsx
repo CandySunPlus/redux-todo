@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { TodoFilters } from '../actions/todos'
-import TodoItem from './todo-list.jsx'
+import TodoItem from './todo-item.jsx'
 import Footer from './footer.jsx'
 
 const TODO_FILTERS = {
   [TodoFilters.SHOW_ALL]: () => true,
-  [TodoFilters.SHOW_ACTIVE]: todo => !todo.completed,
-  [TodoFilters.SHOW_COMPLETED]: todo => todo.completed
+  [TodoFilters.SHOW_ACTIVE]: todo => !todo.get('completed'),
+  [TodoFilters.SHOW_COMPLETED]: todo => todo.get('completed')
 };
 
 export default class TodoList extends Component {
@@ -64,18 +64,24 @@ export default class TodoList extends Component {
 
   render() {
     const { todos, actions } = this.props;
+
     const filteredTodos = todos.filter(TODO_FILTERS[this.state.filter]);
-    const completedCount = todos.count(todo => {
-      todo.completed === true
+    const completedCount = todos.count((todo) => {
+      return todo.get('completed') === true
+    });
+    let todoItems = [];
+
+    filteredTodos.map(todo => {
+      todoItems.push(
+        <TodoItem key={todo.get('id')} todo={todo} {...actions} />
+      );
     });
 
     return (
       <section className="main">
         {this.renderToggleAll(completedCount)}
         <ul className="todo-list">
-          {filteredTodos.map(todo => {
-            <TodoItem key={todo.id} todo={todo} {...actions} />
-          })}
+          {todoItems}
         </ul>
         {this.renderFooter(completedCount)}
       </section>

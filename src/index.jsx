@@ -1,22 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore,  } from 'redux'
-import { Provider } from 'react-redux'
+import { createStore, bindActionCreators } from 'redux'
+import { Provider, connect } from 'react-redux'
 import TodoApp from './components/app.jsx'
+import * as TodoActions from './actions/todos'
 import reducers from './reducers/todos'
 
 
 const store = createStore(reducers);
 
-console.log(store.getState());
-
-let unsubscribe = store.subscribe(() => {
+const unsubscribe = store.subscribe(() => {
     console.log(store.getState());
 });
 
+const TodoAppContainer = connect(
+  state => ({todos: state}),
+  dispatch => ({actions: bindActionCreators(TodoActions, dispatch)})
+)(TodoApp);
+
 ReactDOM.render(
   <Provider store={store}>
-    <TodoApp />
+    <TodoAppContainer onDestroy={() => unsubscribe()}/>
   </Provider>,
   document.getElementById('todoMVC')
 );

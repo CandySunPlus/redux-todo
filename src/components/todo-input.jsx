@@ -34,7 +34,7 @@ export default class TodoInput extends Component {
   }
 
   handleChange(evt) {
-    this.setState({text: evt.target.value.trim()});
+    this.setState({text: evt.target.value});
   }
 
   render() {
