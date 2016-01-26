@@ -1,5 +1,5 @@
 # redux-todo
-redux todoMVC demo
+redux todoMVC [Demo](http://candysunplus.github.io/redux-todo/)
 
 - install:
 `npm i`
