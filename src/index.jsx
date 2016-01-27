@@ -1,12 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, bindActionCreators } from 'redux'
+import { createStore, bindActionCreators, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
 import TodoApp from './components/app.jsx'
 import { TodoActionCreators } from './actions/todos'
 import reducers from './reducers/todos'
 
-const store = createStore(reducers);
+const logger = store => next => action => {
+  // middleware for log dispatch and state changes
+  console.log('dispatch action: ', action.type);
+  let result = next(action);
+  console.log('next state: ', store.getState());
+  return result;
+};
+
+const store = applyMiddleware(logger)(createStore)(reducers);
+
 const unsubscribe = store.subscribe(() => {
   // you can add more process here when action dispatched
   // console.log(store.getState());
