@@ -1,6 +1,6 @@
-import 'babel-core/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import fetch from 'isomorphic-fetch'
 import { createStore, bindActionCreators, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
 import thunk from 'redux-thunk'
@@ -15,6 +15,10 @@ const logger = store => next => action => {
   console.log('next state: ', store.getState());
   return result;
 };
+
+fetch('http://www.baidu.com').then(response => {
+  console.log(response);
+});
 
 const store = applyMiddleware(thunk, logger)(createStore)(reducers);
 
