@@ -1,7 +1,9 @@
+import 'babel-core/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, bindActionCreators, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
+import thunk from 'redux-thunk'
 import TodoApp from './components/app.jsx'
 import { TodoActionCreators } from './actions/todos'
 import reducers from './reducers/todos'
@@ -14,7 +16,7 @@ const logger = store => next => action => {
   return result;
 };
 
-const store = applyMiddleware(logger)(createStore)(reducers);
+const store = applyMiddleware(thunk, logger)(createStore)(reducers);
 
 const unsubscribe = store.subscribe(() => {
   // you can add more process here when action dispatched

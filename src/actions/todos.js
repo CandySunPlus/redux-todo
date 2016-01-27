@@ -14,7 +14,8 @@ export const TodoActions = Enum(
   'EDIT_TODO',
   'COMPLETE_TODO',
   'COMPLETE_ALL_TODO',
-  'CLEAR_COMPLETED_TODO'
+  'CLEAR_COMPLETED_TODO',
+  'FETCH_TODO'
 );
 
 const addTodo = (text) => {
