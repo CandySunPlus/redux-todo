@@ -35,6 +35,17 @@ export default function todos(state=initialState, action) {
     return state.filter(todo => {
       return todo.get('completed') === false;
     });
+    case TodoActions.FETCH_TODO:
+    let state = [];
+    for (let id of Object.keys(action.todos)) {
+      const { completed, text } = action.todos[id];
+      state.push({
+        id: parseInt(id),
+        completed,
+        text
+      });
+    }
+    return Immutable.fromJS(state);
     default:
     return state;
   }

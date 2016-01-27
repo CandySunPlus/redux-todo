@@ -18,11 +18,17 @@ export const TodoActions = Enum(
   'FETCH_TODO'
 );
 
-const addTodo = (text) => {
+const _addTodo = (text) => {
   return {
     type: TodoActions.ADD_TODO,
     text
   };
+};
+
+const addTodo = (text, firenext) => (dispatch, getState) => {
+  dispatch(_addTodo(text));
+  let {id, ...content}= getState().last().toJS();
+  return firenext.child(`todos/${id}`).set(content);
 };
 
 const deleteTodo = (id) => {
@@ -60,6 +66,20 @@ const clearCompletedTodo = () => {
   };
 };
 
+const _fetchTodo = (todos) => {
+  return {
+    type: TodoActions.FETCH_TODO,
+    todos
+  };
+};
+
+const fetchTodo = (firenext) => dispatch => {
+  return firenext.child('todos').exec().then((snapshot) => {
+    let todos = snapshot.val() || {};
+    return dispatch(_fetchTodo(todos));
+  });
+};
+
 export const TodoActionCreators = {
-  addTodo, deleteTodo, editTodo, completeTodo, completeAllTodo, clearCompletedTodo
+  addTodo, deleteTodo, editTodo, completeTodo, completeAllTodo, clearCompletedTodo, fetchTodo
 };

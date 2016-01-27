@@ -13,8 +13,14 @@ export default class TodoApp extends Component {
       })
     ).isRequired,
     actions: PropTypes.object.isRequired,
+    firenext: PropTypes.object.isRequired,
     onDestroy: PropTypes.func.isRequired
   };
+
+  componentWillMount() {
+    const { firenext, actions: { fetchTodo }} = this.props;
+    fetchTodo(firenext);
+  }
 
   componentWillUnmount() {
     const { onDestroy } = this.props;
@@ -22,10 +28,10 @@ export default class TodoApp extends Component {
   }
 
   render() {
-    const { todos, actions } = this.props;
+    const { todos, actions, firenext } = this.props;
     return (
       <section className="todoapp">
-        <Header addTodo={actions.addTodo} />
+        <Header addTodo={(text) => actions.addTodo(text, firenext)} />
         <TodoList todos={todos} {...actions} />
       </section>
     );
