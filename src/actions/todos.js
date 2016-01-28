@@ -78,17 +78,32 @@ const completeTodo = id => (dispatch, getState) => {
   return firenext.child(`todos/${id}`).update({completed});
 };
 
-const completeAllTodo = isAllCompleted => {
+const _completeAllTodo = isAllCompleted => {
   return {
     type: TodoActions.COMPLETE_ALL_TODO,
     isAllCompleted
   };
 };
 
-const clearCompletedTodo = () => {
+const completeAllTodo = isAllCompleted => (dispatch, getState) => {
+  dispatch(_completeAllTodo(isAllCompleted));
+  getState().map(todo => {
+    let {id, completed} = todo.toJS();
+    firenext.child(`todos/${id}`).update({completed});
+  });
+};
+
+const _clearCompletedTodo = () => {
   return {
     type: TodoActions.CLEAR_COMPLETED_TODO
   };
+};
+
+const clearCompletedTodo = () => (dispatch, getState) => {
+  getState().filter(todo => todo.get('completed') === true).map(todo => {
+    firenext.child(`todos/${todo.get('id')}`).remove();
+  });
+  dispatch(_clearCompletedTodo());
 };
 
 const _fetchTodo = todos => {
