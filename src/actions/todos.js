@@ -1,4 +1,8 @@
 import Enum from 'es6-enum'
+import Firenext from 'firenext'
+
+const firenext = new Firenext('https://incandescent-inferno-4622.firebaseio.com');
+
 
 // Todo filter types
 export const TodoFilters = Enum(
@@ -18,27 +22,32 @@ export const TodoActions = Enum(
   'FETCH_TODO'
 );
 
-const _addTodo = (text) => {
+const _addTodo = text => {
   return {
     type: TodoActions.ADD_TODO,
     text
   };
 };
 
-const addTodo = (text, firenext) => (dispatch, getState) => {
+const addTodo = text => (dispatch, getState) => {
   dispatch(_addTodo(text));
   let {id, ...content}= getState().last().toJS();
   return firenext.child(`todos/${id}`).set(content);
 };
 
-const deleteTodo = (id) => {
+const _deleteTodo = (id) => {
   return {
     type: TodoActions.DELETE_TODO,
     id
   };
 };
 
-const editTodo = (id, text) => {
+const deleteTodo = id => dispatch => {
+  dispatch(_deleteTodo(id));
+  return firenext.child(`todos/${id}`).remove();
+};
+
+const _editTodo = (id, text) => {
   return {
     type: TodoActions.EDIT_TODO,
     id,
@@ -46,14 +55,30 @@ const editTodo = (id, text) => {
   };
 };
 
-const completeTodo = (id) => {
+const editTodo = (id, text) => dispatch => {
+  dispatch(_editTodo(id, text));
+  return firenext.child(`todos/${id}`).update({text});
+}
+
+const _completeTodo = id => {
   return {
     type: TodoActions.COMPLETE_TODO,
     id
   };
 };
 
-const completeAllTodo = (isAllCompleted) => {
+const completeTodo = id => (dispatch, getState) => {
+  dispatch(_completeTodo(id));
+  let completed = true;
+  getState().forEach((todo) => {
+    if (todo.get('id') == id) {
+      completed = todo.get('completed');
+    }
+  });
+  return firenext.child(`todos/${id}`).update({completed});
+};
+
+const completeAllTodo = isAllCompleted => {
   return {
     type: TodoActions.COMPLETE_ALL_TODO,
     isAllCompleted
@@ -66,14 +91,14 @@ const clearCompletedTodo = () => {
   };
 };
 
-const _fetchTodo = (todos) => {
+const _fetchTodo = todos => {
   return {
     type: TodoActions.FETCH_TODO,
     todos
   };
 };
 
-const fetchTodo = (firenext) => dispatch => {
+const fetchTodo = () => dispatch => {
   return firenext.child('todos').exec().then((snapshot) => {
     let todos = snapshot.val() || {};
     return dispatch(_fetchTodo(todos));

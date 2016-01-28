@@ -1,14 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Firenext from 'firenext'
 import { createStore, bindActionCreators, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
 import thunk from 'redux-thunk'
 import TodoApp from './components/app.jsx'
 import { TodoActionCreators } from './actions/todos'
 import reducers from './reducers/todos'
-
-const firenext = new Firenext('https://incandescent-inferno-4622.firebaseio.com');
 
 const logger = store => next => action => {
   // middleware for log dispatch and state changes
@@ -33,7 +30,7 @@ const TodoAppContainer = connect(
 // unsubcribe actions from store when root component will unmount
 ReactDOM.render(
   <Provider store={store}>
-    <TodoAppContainer onDestroy={() => unsubscribe()} firenext={firenext} />
+    <TodoAppContainer onDestroy={() => unsubscribe()} />
   </Provider>,
   document.getElementById('todoMVC')
 );

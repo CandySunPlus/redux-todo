@@ -1,11 +1,7 @@
 import Immutable from 'immutable'
 import { TodoActions } from '../actions/todos'
 
-const initialState = Immutable.fromJS([{
-  text: 'First Todo',
-  completed: false,
-  id: 1
-}]);
+const initialState = Immutable.List();
 
 // redux reducer is make (state, action) => new state
 export default function todos(state=initialState, action) {
@@ -36,8 +32,9 @@ export default function todos(state=initialState, action) {
       return todo.get('completed') === false;
     });
     case TodoActions.FETCH_TODO:
-    let state = [];
-    for (let id of Object.keys(action.todos)) {
+    let state = [],
+    sortedIds = Object.keys(action.todos).sort();
+    for (let id of sortedIds) {
       const { completed, text } = action.todos[id];
       state.push({
         id: parseInt(id),
