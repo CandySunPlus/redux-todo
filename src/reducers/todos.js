@@ -8,7 +8,7 @@ export default function todos(state=initialState, action) {
   switch (action.type) {
     case TodoActions.ADD_TODO:
     const newTodo = Immutable.Map({
-      id: state.size + 1,
+      id: state.reduce((maxId, todo) => Math.max(todo.get('id'), maxId), -1) + 1,
       text: action.text,
       completed: false
     });
