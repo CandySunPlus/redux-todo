@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { TodoFilters } from '../actions/todos'
-import TodoItem from './todo-item.jsx'
-import Footer from './footer.jsx'
+import TodoItem from './todo-item'
+import Footer from './footer'
 
 const TODO_FILTERS = {
   [TodoFilters.SHOW_ALL]: () => true,

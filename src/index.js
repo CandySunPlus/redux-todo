@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { createStore, bindActionCreators, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
 import thunk from 'redux-thunk'
-import TodoApp from './components/app.jsx'
+import TodoApp from './components/app'
 import { TodoActionCreators } from './actions/todos'
 import reducers from './reducers/todos'
 

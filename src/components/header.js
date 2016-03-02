@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import TodoInput from './todo-input.jsx'
+import TodoInput from './todo-input'
 
 export default class Header extends Component {
   static propTypes = {

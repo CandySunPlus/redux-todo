@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import ImmutablePropTypes from 'react-immutable-proptypes'
-import TodoInput from './todo-input.jsx'
+import TodoInput from './todo-input'
 
 export default class TodoItem extends Component {
   static propTypes = {

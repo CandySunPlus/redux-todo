@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
-import Header from './header.jsx'
-import TodoList from './todo-list.jsx'
+import Header from './header'
+import TodoList from './todo-list'
 
 export default class TodoApp extends Component {
   static propTypes = {
